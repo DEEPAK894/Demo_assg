@@ -1,0 +1,12 @@
+my_snowflake_profile:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: https://eu85787.us-east-2.aws.snowflakecomputing.com
+      warehouse: MY_WAREHOUSE
+      role: DBT_ROLE
+      user: DEEPAKCYADAV822
+      password: Deepu@822
+      database: MY_PROJECT 
+      schema: MY_SCHEMA
