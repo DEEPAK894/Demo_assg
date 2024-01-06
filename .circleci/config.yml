@@ -15,15 +15,7 @@ jobs:
 
     steps:
       - checkout
-  - run:
-        name: Debug Snowflake Connection
-        command: |
-          set -x
-          echo "export SNOWSQL_ACCOUNT=https://eu85787.us-east-2.aws.snowflakecomputing.com" >> $BASH_ENV
-          echo "export SNOWSQL_USER=DEEPAKCYADAV822" >> $BASH_ENV
-          echo "export SNOWSQL_PASSWORD=<Deepu@822>" >> $BASH_ENV
-          source $BASH_ENV
-          set +x
+  
 
     - run:
         name: Check Environment Variables
