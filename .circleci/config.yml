@@ -17,11 +17,16 @@ jobs:
       - checkout
 
       - run:
+          name: Docker Login
+          command: |
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+      - run:
           name: Setup Snowflake Connection
           command: |
             echo "export SNOWSQL_ACCOUNT=https://eu85787.us-east-2.aws.snowflakecomputing.com" >> $BASH_ENV
             echo "export SNOWSQL_USER=DEEPAKCYADAV822" >> $BASH_ENV
-            echo "export SNOWSQL_PASSWORD=<your_snowflake_password>" >> $BASH_ENV
+            echo "export SNOWSQL_PASSWORD=<Deepu@822>" >> $BASH_ENV
             source $BASH_ENV
 
       - run:
