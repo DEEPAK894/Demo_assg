@@ -7,8 +7,13 @@ jobs:
 
     steps:
       - run:
-          name: Docker Login
+          name: Check Docker version and login
           command: |
+            # Add your script here
+            echo "Docker version information:"
+            docker version
+
+            # Docker login
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
       - checkout
