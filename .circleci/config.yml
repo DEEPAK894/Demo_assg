@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/python:3.x
+      - image: python:3.x
 
     steps:
       - checkout
@@ -11,7 +11,7 @@ jobs:
 
   deploy:
     docker:
-      - image: circleci/python:3.x
+      - image: python:3.x
 
     steps:
       - checkout
@@ -24,9 +24,9 @@ jobs:
       - run:
           name: Setup Snowflake Connection
           command: |
-            echo "export SNOWSQL_ACCOUNT=https://eu85787.us-east-2.aws.snowflakecomputing.com" >> $BASH_ENV
-            echo "export SNOWSQL_USER=DEEPAKCYADAV822" >> $BASH_ENV
-            echo "export SNOWSQL_PASSWORD=<Deepu@822>" >> $BASH_ENV
+            echo "export SNOWSQL_ACCOUNT=$SNOWSQL_ACCOUNT" >> $BASH_ENV
+            echo "export SNOWSQL_USER=$SNOWSQL_USER" >> $BASH_ENV
+            echo "export SNOWSQL_PASSWORD=$SNOWSQL_PASSWORD" >> $BASH_ENV
             source $BASH_ENV
 
       - run:
