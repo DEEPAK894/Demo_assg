@@ -8,8 +8,7 @@ jobs:
     steps:
       - checkout
       # Add more steps as needed for your specific project setup
-
- deploy:
+  deploy:
   docker:
     - image: python:3.8
 
@@ -42,6 +41,7 @@ jobs:
         name: Run dbt
         command: |
           dbt run
+
 
 
 workflows:
