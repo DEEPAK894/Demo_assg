@@ -19,10 +19,9 @@ jobs:
       - run:
           name: Setup Snowflake Connection
           command: |
-            echo "export SNOWSQL_ACCOUNT=https://eu85787.us-east-2.aws.snowflakecomputing.com" >> $BASH_ENV
-            echo "export SNOWSQL_USER=DEEPAKCYADAV822" >> $BASH_ENV
-            echo "export SNOWSQL_PASSWORD=<Deepu@822>" >> $BASH_ENV
-            source $BASH_ENV
+            echo "SNOWSQL_ACCOUNT: $SNOWSQL_ACCOUNT"
+            echo "SNOWSQL_USER: $SNOWSQL_USER"
+            echo "SNOWSQL_PASSWORD: $SNOWSQL_PASSWORD"
 
       - run:
           name: Install dbt
