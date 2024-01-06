@@ -1,11 +1,21 @@
-deploy:
-  docker:
-    - image: python:3.8
+version: 2.1
 
-  steps:
-    - checkout
+jobs:
+  build:
+    docker:
+      - image: python:3.8
 
-    - run:
+    steps:
+      - checkout
+      # Add more steps as needed for your specific project setup
+
+  deploy:
+    docker:
+      - image: python:3.8
+
+    steps:
+      - checkout
+  - run:
         name: Debug Snowflake Connection
         command: |
           set -x
@@ -22,16 +32,16 @@ deploy:
           echo "SNOWSQL_USER: $SNOWSQL_USER"
           echo "SNOWSQL_PASSWORD: $SNOWSQL_PASSWORD"
 
-    - run:
-        name: Install dbt
-        command: |
-          pip install dbt
 
-    - run:
-        name: Run dbt
-        command: |
-          dbt run
+      - run:
+          name: Install dbt
+          command: |
+            pip install dbt
 
+      - run:
+          name: Run dbt
+          command: |
+            dbt run
 
 workflows:
   version: 2
