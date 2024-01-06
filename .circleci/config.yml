@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: python:3.x
+      - image: python:3.8  # Use a specific Python version
 
     steps:
       - run:
@@ -17,7 +17,7 @@ jobs:
 
   deploy:
     docker:
-      - image: python:3.x
+      - image: python:3.8  # Use the same Python version as in the build job
 
     steps:
       - checkout
