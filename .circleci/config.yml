@@ -1,11 +1,6 @@
 version: 2.1
 
 jobs:
-
-    steps:
-      - checkoutversion: 2.1
-
-jobs:
   build:
     docker:
       - image: python:3.x
@@ -20,56 +15,6 @@ jobs:
       # Add more steps as needed for your specific project setup
       # ...
 
-  deploy:
-    docker:
-      - image: python:3.x
-
-    steps:
-      - checkout
-
-      - run:
-          name: Setup Snowflake Connection
-          command: |
-            echo "export SNOWSQL_ACCOUNT=$SNOWSQL_ACCOUNT" >> $BASH_ENV
-            echo "export SNOWSQL_USER=$SNOWSQL_USER" >> $BASH_ENV
-            echo "export SNOWSQL_PASSWORD=$SNOWSQL_PASSWORD" >> $BASH_ENV
-            source $BASH_ENV
-
-      - run:
-          name: Install dbt
-          command: |
-            pip install dbt
-
-      - run:
-          name: Run dbt
-          command: |
-            dbt run
-
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - main
-
-
-      - run:
-          name: Docker Login
-          command:
-            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
-      # Add more steps as needed for your specific project setup
-      # ...
-
-  build:
-    docker:
-      - image: python:3.x
   deploy:
     docker:
       - image: python:3.x
