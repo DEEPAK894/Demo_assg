@@ -1,0 +1,13 @@
+# dbt_project.yml
+
+name: my_dbt_project
+version: 1.0.0
+
+config-version: 2
+
+models:
+  my_model:
+    +materialized: view
+
+profile: "my_snowflake_profile"
+
