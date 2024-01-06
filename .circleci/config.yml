@@ -7,7 +7,14 @@ jobs:
 
     steps:
       - checkout
+
+      - run:
+          name: Docker Login
+          command: |
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
       # Add more steps as needed for your specific project setup
+      # ...
 
   deploy:
     docker:
@@ -15,11 +22,6 @@ jobs:
 
     steps:
       - checkout
-
-      - run:
-          name: Docker Login
-          command: |
-            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
       - run:
           name: Setup Snowflake Connection
