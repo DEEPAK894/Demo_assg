@@ -1,38 +1,37 @@
-version: 2.1
+deploy:
+  docker:
+    - image: python:3.8
 
-jobs:
-  build:
-    docker:
-      - image: python:3.8
+  steps:
+    - checkout
 
-    steps:
-      - checkout
-      # Add more steps as needed for your specific project setup
+    - run:
+        name: Debug Snowflake Connection
+        command: |
+          set -x
+          echo "export SNOWSQL_ACCOUNT=https://eu85787.us-east-2.aws.snowflakecomputing.com" >> $BASH_ENV
+          echo "export SNOWSQL_USER=DEEPAKCYADAV822" >> $BASH_ENV
+          echo "export SNOWSQL_PASSWORD=<Deepu@822>" >> $BASH_ENV
+          source $BASH_ENV
+          set +x
 
-  deploy:
-    docker:
-      - image: python:3.8
+    - run:
+        name: Check Environment Variables
+        command: |
+          echo "SNOWSQL_ACCOUNT: $SNOWSQL_ACCOUNT"
+          echo "SNOWSQL_USER: $SNOWSQL_USER"
+          echo "SNOWSQL_PASSWORD: $SNOWSQL_PASSWORD"
 
-    steps:
-      - checkout
+    - run:
+        name: Install dbt
+        command: |
+          pip install dbt
 
-      - run:
-          name: Setup Snowflake Connection
-          command: |
-            echo "export SNOWSQL_ACCOUNT=https://eu85787.us-east-2.aws.snowflakecomputing.com" >> $BASH_ENV
-            echo "export SNOWSQL_USER=DEEPAKCYADAV822" >> $BASH_ENV
-            echo "export SNOWSQL_PASSWORD=<Deepu@822>" >> $BASH_ENV
-            source $BASH_ENV
+    - run:
+        name: Run dbt
+        command: |
+          dbt run
 
-      - run:
-          name: Install dbt
-          command: |
-            pip install dbt
-
-      - run:
-          name: Run dbt
-          command: |
-            dbt run
 
 workflows:
   version: 2
